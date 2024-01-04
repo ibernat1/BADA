@@ -1,12 +1,13 @@
 package bdbt_bada_project.SpringApplication;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import java.util.List;
 
 
 @Configuration
@@ -17,17 +18,15 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/main").setViewName("main");
         registry.addViewController("/login").setViewName("login");
-
         registry.addViewController("/main_admin").setViewName("admin/main_admin");
         registry.addViewController("/main_user").setViewName("user/main_user");
+        registry.addViewController("/zwierzeta").setViewName("zwierzeta");
     }
 
 
     public class DashboardController
     {
-        @RequestMapping
-                ("/main"
-                )
+        @RequestMapping("/main")
         public String defaultAfterLogin
                 (HttpServletRequest request) {
             if
@@ -54,6 +53,16 @@ public class AppController implements WebMvcConfigurer {
     @RequestMapping(value={"/main_user"})
     public String showUserPage(Model model) {
         return "user/main_user";
+    }
+
+    @Autowired
+    private ZwierzetaDAO dao;
+
+    @RequestMapping("/zwierzeta")
+    public String showZwierzetaPage(Model model){
+        List<Zwierze> listZwierze = dao.list();
+        model.addAttribute("listZwierze",listZwierze);
+        return "zwierzeta";
     }
 }
 
