@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Wszystkie nasze zwierzaki</title>
+</head>
+<body>
+<div align="center">
+    <h1>Zwierzeta w schronisku</h1>
+</div>
+<!-- Entry to new page -->
+<a href="/dodajzwierze">Dodaj zwierze</a>
+<!-- Table -->
+<table border = "1" cellpadding = "10"> <!-– border –
+    obramowanie, cellpadding – rozmiar komórki -->
+    <!-- Table header -->
+    <thead>
+    <tr> <!-- Table row -->
+        <th>Imie</th> <!–- Table column -->
+        <th>Data przyjęcia</th>
+        <th>Szczepienie</th>
+        <th>Szczepienie1</th>
+        <th>Data adopcji</th>
+    </tr>
+    </thead>
+    <!-- Table body -->
+    <tbody>
+    <tr th:each = "zwierze : ${listZwierze}">
+        <td th:text = "${zwierze.imie}">Imie</td>
+        <td th:text = "${zwierze.data_przyjecia}">Data przyjęcia</td>
+        <td>
+            <span th:if="${zwierze.szczepienie_wscieklizna == 'T'}">Tak</span>
+            <span th:if="${zwierze.szczepienie_wscieklizna == 'N'}">Nie</span>
+        </td>
+        <td th:text = "${zwierze.szczepienie_wscieklizna}">Szczepienie1</td>
+        <td th:text = "${zwierze.data_adopcji}">Data adopcji</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

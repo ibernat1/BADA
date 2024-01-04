@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
@@ -64,6 +66,20 @@ public class AppController implements WebMvcConfigurer {
         model.addAttribute("listZwierze",listZwierze);
         return "zwierzeta";
     }
+    @RequestMapping("/dodajzwierze")
+    public String showDodajZwierzeForm(Model model){
+        Zwierze zwierze = new Zwierze();
+        model.addAttribute("zwierze",zwierze);
+        return "dodajzwierze_form";
+    }
+
+    @RequestMapping(value ="/zapisz", method = RequestMethod.POST)
+    public String save(@ModelAttribute("zwierze") Zwierze zwierze){
+        dao.save(zwierze);
+
+        return "redirect:/zwierzeta";
+    }
+
 }
 
 

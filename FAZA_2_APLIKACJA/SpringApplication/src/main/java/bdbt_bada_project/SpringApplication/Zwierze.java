@@ -6,7 +6,7 @@ public class Zwierze {
     private int nr_zwierzecia;
     private String imie;
     private Date data_przyjecia;
-    private boolean szczepienie;
+    private char szczepienie_wscieklizna;
     private Date data_adopcji;
     private String rok_urodzenia;
     private Integer nr_schroniska;
@@ -15,9 +15,10 @@ public class Zwierze {
     private Integer nr_rasy;
 
     public Zwierze() {
+
     }
 
-    public int getNr_zwierzecia() {
+    public Integer getNr_zwierzecia() {
         return nr_zwierzecia;
     }
 
@@ -41,12 +42,12 @@ public class Zwierze {
         this.data_przyjecia = data_przyjecia;
     }
 
-    public boolean isSzczepienie() {
-        return szczepienie;
+    public char getSzczepienie_wscieklizna() {
+        return szczepienie_wscieklizna;
     }
 
-    public void setSzczepienie(boolean szczepienie) {
-        this.szczepienie = szczepienie;
+    public void setSzczepienie_wscieklizna(char szczepienie_wscieklizna) {
+        this.szczepienie_wscieklizna = szczepienie_wscieklizna;
     }
 
     public Date getData_adopcji() {
@@ -65,7 +66,7 @@ public class Zwierze {
         this.rok_urodzenia = rok_urodzenia;
     }
 
-    public int getNr_schroniska() {
+    public Integer getNr_schroniska() {
         return nr_schroniska;
     }
 
@@ -73,7 +74,7 @@ public class Zwierze {
         this.nr_schroniska = nr_schroniska;
     }
 
-    public int getNr_adoptujacego() {
+    public Integer getNr_adoptujacego() {
         return nr_adoptujacego;
     }
 
@@ -81,7 +82,7 @@ public class Zwierze {
         this.nr_adoptujacego = nr_adoptujacego;
     }
 
-    public int getNr_kojca() {
+    public Integer getNr_kojca() {
         return nr_kojca;
     }
 
@@ -89,7 +90,7 @@ public class Zwierze {
         this.nr_kojca = nr_kojca;
     }
 
-    public int getNr_rasy() {
+    public Integer getNr_rasy() {
         return nr_rasy;
     }
 
@@ -97,13 +98,13 @@ public class Zwierze {
         this.nr_rasy = nr_rasy;
     }
 
-    public Zwierze(int nr_zwierzecia, String imie, Date data_przyjecia, boolean szczepienie, Date data_adopcji, String rok_urodzenia, Integer nr_schroniska, Integer nr_adoptujacego, Integer nr_kojca, Integer nr_rasy){
+    public Zwierze(Integer nr_zwierzecia, String imie, Date data_przyjecia, char szczepienie_wscieklizna, Date data_adopcji, String rok_urodzenia, Integer nr_schroniska, Integer nr_adoptujacego, Integer nr_kojca, Integer nr_rasy){
         super();
         this.nr_zwierzecia=nr_zwierzecia;
         this.imie=imie;
         this.data_przyjecia=data_przyjecia;
-        this.szczepienie=szczepienie;
-        this. data_adopcji=data_adopcji;
+        this.szczepienie_wscieklizna=szczepienie_wscieklizna;
+        this.data_adopcji=data_adopcji;
         this.rok_urodzenia=rok_urodzenia;
         this.nr_schroniska=nr_schroniska;
         this.nr_adoptujacego=nr_adoptujacego;
