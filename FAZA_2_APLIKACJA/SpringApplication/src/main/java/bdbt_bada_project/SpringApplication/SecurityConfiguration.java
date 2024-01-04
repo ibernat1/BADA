@@ -34,13 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/resources/static/**").permitAll()
+                .antMatchers("/main").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/index")
                 .logoutSuccessUrl("/index")
                 .permitAll();
     }
