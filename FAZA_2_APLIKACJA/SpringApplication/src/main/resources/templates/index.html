@@ -5,24 +5,67 @@
     <title>Welcome Page</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/assets/img/icon.png" type="image/x-icon">
+    <style>
 
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            width: 180px;
+        }
+
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 300px;
+        }
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+}
+body {
+    background-color: #b7f7bf;
+}
+
+
+
+    </style>
 </head>
 
- <body th:style="'background: url(/assets/img/img.png) no-repeat center center fixed;'">
-
-
-<!--<style th:inline="text">-->
-<!--    body{-->
-<!--        background: url([[@{/assets/img/img.png}]])-->
-<!--        no-repeat center center fixed;-->
-<!--    }-->
-<!--</style>-->
-
+<body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
     <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
+        <a class="navbar-brand" href="/">
+            <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -30,78 +73,62 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/main}">Main</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/main}">Login</a>
                 </li>
-
             </ul>
         </div>
     </div>
 </nav>
 
-
-<!--Using images in page    -->
-<!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
+<!-- Section with images and captions -->
 
 
-<div class="container">
+<!-- The rest of your content -->
+<div class="container centered-container">
     <div class="row">
         <div class="col-md-10 mt-5">
-
-            <label style="font-size:30px">Welcome to the home page!</label>
-            <div style="font-size:20px">If you want to login, click <a th:href="@{/main}"><b>here</b></a> or in the
-                upper right corner.
+            <label style="font-size:30px">Witaj na stronie schroniska</label>
+            <div style="font-size:20px">Aby zobaczyć wszystkie zwierzęta kliknij  <a th:href="@{/zwierzeta}"><b>tutaj</b></a> lub wybierz gatunek, który cię interesuja
             </div>
-
         </div>
     </div>
 </div>
 
-<!--<div align="center">
-    <h1>Sales Records</h1>
+<div class="gallery-container">
+<div class="gallery">
+    <a target="_blank" href="/zwierzeta">
+        <img src="/static/assets/img/dog.jpg" alt="Psy" width="600" height="600">
+    </a>
+    <div class="desc">Psy</div>
+</div>
 
-    <table border="1" cellpadding="10">
+<div class="gallery">
+    <a target="_blank" href="/zwierzeta">
+        <img src="../static/assets/img/cat.jpg" alt="Koty" width="800" height="800">
+    </a>
+    <div class="desc">Koty</div>
+</div>
 
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Action</th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="sale : ${listSale}">
-            <td th:text="${sale.id}">ID</td>
-            <td th:text="${sale.item}">Item Name</td>
-            <td th:text="${sale.quantity}">Quantity</td>
-            <td th:text="${sale.amount}">Amount</td>
-        </tr>
-        </tbody>
-
-    </table>
-
-</div>-->
+<div class="gallery">
+    <a target="_blank" href="/zwierzeta">
+        <img src="/static/assets/img/other.jpg" alt="Inne" width="600" height="400">
+    </a>
+    <div class="desc">Pozostałe</div>
+</div>
+</div>
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
 </body>
 </html>
-
