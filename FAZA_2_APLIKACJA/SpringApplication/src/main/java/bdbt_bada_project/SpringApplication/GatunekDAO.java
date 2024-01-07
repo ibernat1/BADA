@@ -42,7 +42,9 @@ public class GatunekDAO {
     }
     /* Read – odczytywanie danych z bazy */
     public Gatunek get(int nr) {
-        return null;
+        String sql= String.format("SELECT * FROM Gatunek WHERE nr_gatunku=%d", nr);
+        Gatunek gatunek=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Gatunek.class));
+        return gatunek;
     }
     /* Update – aktualizacja danych */
     public void update(Gatunek gatunek) {
