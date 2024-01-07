@@ -34,6 +34,9 @@ public class ZwierzetaDAO {
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
         insertActor.withTableName("ZWIERZĘTA").usingColumns("imie", "data_przyjecia", "szczepienie_wscieklizna", "data_adopcji", "rok_urodzenia", "nr_schroniska", "nr_adoptujacego","nr_kojca","nr_rasy");
 
+        zwierze.setData_przyjecia(new java.sql.Date(zwierze.getData_przyjecia().getTime()));
+        zwierze.setData_adopcji(new java.sql.Date(zwierze.getData_adopcji().getTime()));
+
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
         insertActor.execute(param);
     }

@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Nowe zwierze</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="icon" href="/static/assets/img/icon.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $(".datepicker").datepicker();
+        });
+    </script>
 
     <style>
         body {
@@ -38,6 +46,21 @@
 
         input[type=submit]:hover {
             background-color: #45a049;
+        }
+
+        div.form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
     </style>
@@ -73,59 +96,56 @@
     </div>
 </nav>
 
-<div align="center">
-    <h1>Wprowadź dane zwierzęcia</h1>
-    <br/>
 
-    <form action ="#" th:action="@{/zapisz}" th:object="${zwierze}" method="post">
-        <table border = "1" cellpadding="10">
-            <tr>
-                <td> Numer</td>
-                <td><input type="text" th:field="*{nr_zwierzecia}"></td>
-            </tr>
-            <tr>
-                <td> Imie</td>
-                <td><input type="text" th:field="*{imie}"></td>
-            </tr>
-            <tr>
-                <td> Data przyjęcia</td>
-                <td><input type="text" th:field="*{data_przyjecia}"></td>
-            </tr>
-            <tr>
-                <td> Czy szczepiony(T/N)</td>
-                <td><input type="text" th:field="*{szczepienie_wscieklizna}"></td>
-            </tr>
-            <tr>
-                <td> Data_adopcji</td>
-                <td><input type="text" th:field="*{data_adopcji}"></td>
-            </tr>
-            <tr>
-                <td> Rok urodzenia</td>
-                <td><input type="text" th:field="*{rok_urodzenia}"></td>
-            </tr>
-            <tr>
-                <td> Numer schroniksa(1)</td>
-                <td><input type="text" th:field="*{nr_schroniska}"></td>
-            </tr>
-            <tr>
-                <td> Numer adoptujacego(1-3)</td>
-                <td><input type="text" th:field="*{nr_adoptujacego}"></td>
-            </tr>
-            <tr>
-                <td> Numer kojca(1-3)</td>
-                <td><input type="text" th:field="*{nr_kojca}"></td>
-            </tr>
 
-            <tr>
-                <td> Numer rasy(1-3)</td>
-                <td><input type="text" th:field="*{nr_rasy}"></td>
-            </tr>
-            <tr>
-                <td colspan="2"> <button type="submit"> Zapisz </button> </td>
-            </tr>
-        </table>
-    </form>
+<div class="container centered.container">
+    <div class="form">
+        <form action="#" th:action="@{/zapisz}" th:object="${zwierze}" method="post">
+
+            <label for="imie">Imię</label>
+            <input type="text" id="imie" th:field="*{imie}" placeholder="Imię...">
+
+            <label for="data_przyjecia">Data przyjęcia</label><br>
+            <input type="date" id="data_przyjecia" th:field="*{data_przyjecia}" placeholder="Data przyjęcia...">
+
+            <br>
+            <label for="szczepienie_wscieklizna">Czy szczepiony (T/N)</label>
+            <select id="szczepienie_wscieklizna"  th:field="*{szczepienie_wscieklizna}">
+                <option value="T">Tak</option>
+                <option value="N">Nie</option>
+            </select>
+
+            <label for="data_adopcji">Data adopcji</label><br>
+            <input type="date" id="data_adopcji" th:field="*{data_adopcji}" placeholder="Data adopcji...">
+
+
+            <label for="rok_urodzenia">Rok urodzenia</label>
+            <input type="text" id="rok_urodzenia" th:field="*{rok_urodzenia}" placeholder="Rok urodzenia...">
+
+            <label for="nr_schroniska">Numer schroniska</label>
+            <input type="text" id="nr_schroniska" th:field="*{nr_schroniska}" placeholder="Numer schroniska...">
+
+            <label for="nr_adoptujacego">Numer adoptującego</label>
+            <input type="text" id="nr_adoptujacego" th:field="*{nr_adoptujacego}" placeholder="Numer adoptującego...">
+
+            <label for="nr_kojca">Numer kojca</label>
+            <input type="text" id="nr_kojca" th:field="*{nr_kojca}" placeholder="Numer kojca...">
+
+            <label for="nr_rasy">Numer rasy</label>
+            <input type="text" id="nr_rasy" th:field="*{nr_rasy}" placeholder="Numer rasy...">
+
+            <div style="margin-top: 10px;">
+                <button type="submit" style="background-color: #025e0d; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Dodaj
+                </button>
+                <button type="button" onclick="window.location.href='/zwierzeta'" style="background-color: #C70039; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                    Anuluj
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 </body>
 </html>
