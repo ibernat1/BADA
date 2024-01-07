@@ -80,6 +80,9 @@ public class AppController implements WebMvcConfigurer {
         return "redirect:/zwierzeta";
     }
 
+//    private RasaDAO rasaDAO;
+//    private GatunekDAO gatunekDAO;
+
 }
 
 

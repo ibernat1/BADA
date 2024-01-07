@@ -124,7 +124,7 @@
 		<artifactId>ojdbc11</artifactId>
 		<version>1.0</version>
 		<scope>system</scope>
-		<systemPath>C:/Users/berna/Documents/.Studia/sem5/BADA/etap2/rzeczy/ojdbc11.jar</systemPath>
+		<systemPath>D:\app\product\ojdbc11.jar</systemPath>
 	</dependency>
 
 </dependencies>
