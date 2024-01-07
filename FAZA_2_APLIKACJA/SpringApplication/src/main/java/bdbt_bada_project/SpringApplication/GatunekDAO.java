@@ -28,7 +28,7 @@ public class GatunekDAO {
 
     public String getNazwaGatunkuWithNr(int nr){
         String sql= String.format("SELECT * FROM Gatunki WHERE nr_gatunku=%d", nr);
-        String nazwa_gatunku=jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Gatunek.class)).get(0).getNazwa_gatunku();
+        String nazwa_gatunku=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Gatunek.class)).getNazwa_gatunku();
         return nazwa_gatunku;
     }
     /* Insert – wstawianie nowego wiersza do bazy */

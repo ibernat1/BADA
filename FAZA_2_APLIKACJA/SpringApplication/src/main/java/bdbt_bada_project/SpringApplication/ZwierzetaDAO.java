@@ -56,4 +56,15 @@ public class ZwierzetaDAO {
     public void delete(int nr) {
     }
 
+    public String getNazwa_rasy(int nr_rasy){
+        RasaDAO rasa = new RasaDAO(jdbcTemplate);
+        return rasa.getNazwaRasyWithNr(nr_rasy);
+    }
+    public String getNazwa_gatunku(int nr_rasy){
+        RasaDAO rasa = new RasaDAO(jdbcTemplate);
+        GatunekDAO gatunek = new GatunekDAO(jdbcTemplate);
+        int nr_gatunku=rasa.getNrGatunkuWithNrRasy(nr_rasy);
+        return gatunek.getNazwaGatunkuWithNr(nr_gatunku);
+    }
+
 }

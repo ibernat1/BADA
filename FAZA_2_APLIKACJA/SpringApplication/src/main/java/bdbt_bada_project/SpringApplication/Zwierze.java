@@ -111,4 +111,6 @@ public class Zwierze {
         this.nr_kojca=nr_kojca;
         this.nr_rasy=nr_rasy;
     }
+
+
 }
