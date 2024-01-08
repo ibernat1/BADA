@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -50,9 +51,14 @@ public class ZwierzetaDAO {
 
     /* Update – aktualizacja danych */
     public void update(Zwierze zwierze) {
+        zwierze.setData_przyjecia(new java.sql.Date(zwierze.getData_przyjecia().getTime()));
+        zwierze.setData_adopcji(new java.sql.Date(zwierze.getData_adopcji().getTime()));
+        String sql = "UPDATE Zwierzęta SET imie=:imie, data_przyjecia=:data_przyjecia, szczepienie_wscieklizna=:szczepienie_wscieklizna, data_adopcji=:data_adopcji, rok_urodzenia=:rok_urodzenia, nr_schroniska=:nr_schroniska, nr_adoptujacego=:nr_adoptujacego, nr_kojca=:nr_kojca, nr_rasy=:nr_rasy WHERE nr_zwierzecia=:nr_zwierzecia";
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
+        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        template.update(sql, param);
     }
-
-
 
     /* Delete – wybrany rekord z danym id */
     public void delete(int nr) {

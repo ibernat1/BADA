@@ -42,11 +42,13 @@ public class ZwierzetaDAOTest {
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         Zwierze zwierze = new Zwierze(10,"Benio", sqlDate, 'N', null, "2020", 1, null,1,2  );
     }
-      /*
     @Test
     void testGet(){
-        fail("Jeszcze nie zaimplementowano");
+        int id=1;
+        Zwierze zwierze = dao.get(id);
+        assertNotNull(zwierze);
     }
+      /*
     @Test
     void testUpdate(){
         fail("Jeszcze nie zaimplementowano");

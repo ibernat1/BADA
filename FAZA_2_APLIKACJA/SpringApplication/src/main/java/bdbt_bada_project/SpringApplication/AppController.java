@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
@@ -78,6 +80,20 @@ public class AppController implements WebMvcConfigurer {
         dao.save(zwierze);
 
         return "redirect:/zwierzeta";
+    }
+
+    @RequestMapping("/edytuj/{nr_zwierzecia}")
+    public ModelAndView showEditForm(@PathVariable(name="nr_zwierzecia") int nr_zwierzecia){
+        ModelAndView mav = new ModelAndView("edit_form_zwierze");
+        Zwierze zwierze = dao.get(nr_zwierzecia);
+        mav.addObject("zwierze", zwierze);
+        return mav;
+    }
+
+    @RequestMapping(value="/update", method=RequestMethod.POST)
+    public String update(@ModelAttribute("zwierze") Zwierze zwierze){
+        dao.update(zwierze);
+        return "redirect:/";
     }
 
 //    private RasaDAO rasaDAO;
