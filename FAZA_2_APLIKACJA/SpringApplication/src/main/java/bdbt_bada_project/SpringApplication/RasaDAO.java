@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -26,12 +27,14 @@ public class RasaDAO {
         return listRasa;
     }
     public int getNrGatunkuWithNrRasy(int nr_rasy){
-        String sql= String.format("SELECT * FROM Rasa WHERE nr_rasy=%d", nr_rasy);
+        Object [] args={nr_rasy};
+        String sql= "SELECT * FROM Rasa WHERE nr_rasy= " + args[0];
         int nr_gatunku=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Rasa.class)).getNr_gatunku();
         return nr_gatunku;
     }
     public String getNazwaRasyWithNr(int nr){
-        String sql= String.format("SELECT * FROM Rasa WHERE nr_rasy=%d", nr);
+        Object [] args={nr};
+        String sql= "SELECT * FROM Rasa WHERE nr_rasy= " + args[0];
         String nazwa=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Rasa.class)).getNazwa_rasy();
         return nazwa;
     }
@@ -46,14 +49,22 @@ public class RasaDAO {
     }
     /* Read – odczytywanie danych z bazy */
     public Rasa get(int nr) {
-        String sql= String.format("SELECT * FROM Rasa WHERE nr_rasy=%d", nr);
+        Object [] args={nr};
+        String sql= "SELECT * FROM Rasa WHERE nr_rasy= " + args[0];
         Rasa rasa=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Rasa.class));
         return rasa;
     }
     /* Update – aktualizacja danych */
     public void update(Rasa rasa) {
+        String sql = "UPDATE Rasa SET nazwa_rasy=:nazwa_rasy, nr_gatunku=:nr_gatunku WHERE nr_rasy=:nr_rasy";
+        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(rasa);
+        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        template.update(sql, param);
     }
     /* Delete – wybrany rekord z danym id */
     public void delete(int nr) {
+        String sql = "DELETE FROM Rasa WHERE nr_rasy = ?";
+        jdbcTemplate.update(sql,nr);
     }
 }

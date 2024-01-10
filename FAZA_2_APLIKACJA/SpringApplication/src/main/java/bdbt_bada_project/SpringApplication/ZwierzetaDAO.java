@@ -43,7 +43,8 @@ public class ZwierzetaDAO {
 
     /* Read – odczytywanie danych z bazy */
     public Zwierze get(int nr) {
-        String sql= String.format("SELECT * FROM Zwierzęta WHERE nr_zwierzecia=%d", nr);
+        Object [] args={nr};
+        String sql= "SELECT * FROM Zwierzęta WHERE nr_zwierzecia= " + args[0];
         Zwierze zwierze=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Zwierze.class));
         return zwierze;
     }
