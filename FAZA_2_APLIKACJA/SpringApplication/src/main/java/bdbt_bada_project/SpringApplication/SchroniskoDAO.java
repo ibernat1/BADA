@@ -27,6 +27,7 @@ public class SchroniskoDAO {
     }
 
     /* Insert – wstawianie nowego wiersza do bazy */
+    //też nie wiem czy ktoś bęzie dodawał nowe schroniska
     public void save(Schronisko schronisko) {
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
         insertActor.withTableName("Schroniska").usingColumns("nazwa", "nr_adresu", "data_zalozenia", "kierownik");
