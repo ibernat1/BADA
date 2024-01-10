@@ -37,13 +37,14 @@ public class AdresyDAO {
     }
 
     public Adres get(int nr) {
-        String sql= String.format("SELECT * FROM Adresy WHERE nr_adresu=%d", nr);
+        Object [] args={nr};
+        String sql= "SELECT * FROM Adresy WHERE nr_adresu= " + args[0];
         Adres adres=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Adres.class));
         return adres;
     }
 
     public void update(Adres adres) {
-        String sql = "UPDATE Adresy SET mijscowosc=:miejscowosc, ulica=:ulica, nr_domu=:nr_domu, nr_lokalu=:nr_lokalu WHERE nr_adresu=:nr_adresu";
+        String sql = "UPDATE Adresy SET miejscowosc=:miejscowosc, ulica=:ulica, nr_domu=:nr_domu, nr_lokalu=:nr_lokalu WHERE nr_adresu=:nr_adresu";
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(adres);
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
 
