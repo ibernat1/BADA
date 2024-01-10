@@ -60,6 +60,21 @@
             color: white;
         }
 
+        .button1 {
+            background-color: #025e0d;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button1:hover {
+            background-color: #02a816;
+            color: white;
+        }
+
         .no-underline {
             text-decoration: none !important;
         }
@@ -115,6 +130,7 @@
             <th>Data adopcji</th>
             <th>Numer kojca</th>
             <th>Edytuj</th>
+            <th>Usuń</th>
         </tr>
         </thead>
         <!-- Table body -->
@@ -124,13 +140,16 @@
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
             <td>
                 <span th:if="${zwierze.szczepienie_wscieklizna == 'T'}">Tak</span>
-                <span th:if="${zwierze.szczepienie_wscieklizna == 'N'}">Nie</span>
+                <span th:unless="${zwierze.szczepienie_wscieklizna == 'T'}">Nie</span>
             </td>
             <td th:text="${zwierze.szczepienie_wscieklizna}">Szczepienie1</td>
-            <td th:text="${zwierze.data_adopcji}">Data adopcji</td>
+            <td th:text="${zwierze.data_adopcji}?: 'W schronisku'">Data adopcji</td>
             <td th:text="${zwierze.nr_kojca}">Numer kojca</td>
             <td>
-                <a th:href="@{'/edytujzwierze/' + ${zwierze.nr_zwierzecia}}" class="button no-underline">Edytuj</a>
+                <a th:href="@{'/edytujzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Edytuj</a>
+            </td>
+            <td>
+                <a th:href="@{'/usunzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Usuń</a>
             </td>
         </tr>
         </tbody>

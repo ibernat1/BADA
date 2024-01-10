@@ -35,8 +35,7 @@ public class ZwierzetaDAO {
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
         insertActor.withTableName("ZWIERZĘTA").usingColumns("imie", "data_przyjecia", "szczepienie_wscieklizna", "data_adopcji", "rok_urodzenia", "nr_schroniska", "nr_adoptujacego","nr_kojca","nr_rasy");
 
-        zwierze.setData_przyjecia(new java.sql.Date(zwierze.getData_przyjecia().getTime()));
-        zwierze.setData_adopcji(new java.sql.Date(zwierze.getData_adopcji().getTime()));
+
 
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
         insertActor.execute(param);
@@ -51,8 +50,6 @@ public class ZwierzetaDAO {
 
     /* Update – aktualizacja danych */
     public void update(Zwierze zwierze) {
-        zwierze.setData_przyjecia(new java.sql.Date(zwierze.getData_przyjecia().getTime()));
-        zwierze.setData_adopcji(new java.sql.Date(zwierze.getData_adopcji().getTime()));
         String sql = "UPDATE Zwierzęta SET imie=:imie, data_przyjecia=:data_przyjecia, szczepienie_wscieklizna=:szczepienie_wscieklizna, data_adopcji=:data_adopcji, rok_urodzenia=:rok_urodzenia, nr_schroniska=:nr_schroniska, nr_adoptujacego=:nr_adoptujacego, nr_kojca=:nr_kojca, nr_rasy=:nr_rasy WHERE nr_zwierzecia=:nr_zwierzecia";
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
@@ -62,6 +59,8 @@ public class ZwierzetaDAO {
 
     /* Delete – wybrany rekord z danym id */
     public void delete(int nr) {
+        String sql = "DELETE FROM Zwierzęta WHERE nr_zwierzecia = ?";
+        jdbcTemplate.update(sql,nr);
     }
 
     public String getNazwa_rasy(int nr_rasy){

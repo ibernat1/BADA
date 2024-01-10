@@ -1,6 +1,7 @@
 package bdbt_bada_project.SpringApplication;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Zwierze {
     private int nr_zwierzecia;
@@ -15,7 +16,7 @@ public class Zwierze {
     private Integer nr_rasy;
 
     public Zwierze() {
-
+        this.data_adopcji=null;
     }
 
     public Integer getNr_zwierzecia() {
@@ -55,7 +56,11 @@ public class Zwierze {
     }
 
     public void setData_adopcji(Date data_adopcji) {
-        this.data_adopcji = data_adopcji;
+        if (data_adopcji != null && data_adopcji.toString().isEmpty()) {
+            this.data_adopcji = null;
+        } else {
+            this.data_adopcji = data_adopcji;
+        }
     }
 
     public String getRok_urodzenia() {

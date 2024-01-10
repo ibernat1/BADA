@@ -67,12 +67,11 @@ public class ZwierzetaDAOTest {
 
         dao.update(zwierze);
     }
-      /*
     @Test
     void TestDelete(){
-        fail("Jeszcze nie zaimplementowano");
+        int id = 1;
+        dao.delete(id);
     }
 
-     */
 }
 

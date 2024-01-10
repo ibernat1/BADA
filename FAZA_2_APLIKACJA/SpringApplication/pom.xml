@@ -124,7 +124,19 @@
 		<artifactId>ojdbc11</artifactId>
 		<version>1.0</version>
 		<scope>system</scope>
-		<systemPath>D:\app\product\ojdbc11.jar</systemPath>
+		<systemPath>"C:\app\ojdbc11.jar"</systemPath>
+		<!--D:\app\product\ojdbc11.jar-->
+		<!--C:\app\ojdbc11.jar-->
+	</dependency>
+	<dependency>
+		<groupId>org.thymeleaf</groupId>
+		<artifactId>thymeleaf</artifactId>
+		<version>3.1.2.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.thymeleaf</groupId>
+		<artifactId>thymeleaf-spring5</artifactId>
+		<version>3.1.2.RELEASE</version>
 	</dependency>
 
 </dependencies>

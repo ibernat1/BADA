@@ -60,12 +60,20 @@ public class AppController implements WebMvcConfigurer {
     }
 
     @Autowired
-    private ZwierzetaDAO dao;
+    private ZwierzetaDAO zwierzeDao;
+    @Autowired
+    private RasaDAO rasaDao;
+    @Autowired
+    private GatunekDAO gatunekDao;
 
     @RequestMapping("/zwierzeta")
     public String showZwierzetaPage(Model model){
-        List<Zwierze> listZwierze = dao.list();
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+
+
         model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
         return "zwierzeta";
     }
     @RequestMapping("/dodajzwierze")
@@ -77,24 +85,31 @@ public class AppController implements WebMvcConfigurer {
 
     @RequestMapping(value ="/zapisz", method = RequestMethod.POST)
     public String save(@ModelAttribute("zwierze") Zwierze zwierze){
-        dao.save(zwierze);
+        zwierzeDao.save(zwierze);
 
         return "redirect:/zwierzeta";
     }
 
-    @RequestMapping("/edytuj/{nr_zwierzecia}")
+    @RequestMapping("/edytujzwierze/{nr_zwierzecia}")
     public ModelAndView showEditForm(@PathVariable(name="nr_zwierzecia") int nr_zwierzecia){
         ModelAndView mav = new ModelAndView("edit_form_zwierze");
-        Zwierze zwierze = dao.get(nr_zwierzecia);
+        Zwierze zwierze = zwierzeDao.get(nr_zwierzecia);
         mav.addObject("zwierze", zwierze);
         return mav;
     }
 
     @RequestMapping(value="/update", method=RequestMethod.POST)
     public String update(@ModelAttribute("zwierze") Zwierze zwierze){
-        dao.update(zwierze);
+        zwierzeDao.update(zwierze);
         return "redirect:/";
     }
+
+    @RequestMapping("/usunzwierze/{nr_zwierzecia}")
+    public String usunZwierze(@PathVariable(name = "nr_zwierzecia") Integer nr_zwierzecia){
+        zwierzeDao.delete(nr_zwierzecia);
+        return "redirect:/zwierzeta";
+    }
+
 
 //    private RasaDAO rasaDAO;
 //    private GatunekDAO gatunekDAO;
