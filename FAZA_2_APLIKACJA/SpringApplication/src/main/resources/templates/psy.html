@@ -123,7 +123,6 @@
         <thead>
         <tr> <!-- Table row -->
             <th>Imie</th>
-            <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
             <th>Szczepienie</th>
@@ -136,8 +135,7 @@
         </thead>
         <!-- Table body -->
         <tbody>
-        <tr th:each="zwierze : ${listZwierze} ">
-            <td th:text="${zwierze.nazwa_gatunku}">Imie</td>
+        <tr th:each="zwierze : ${listZwierze} " th:if="${zwierze.nazwa_gatunku == 'Pies'}">
             <td th:text="${zwierze.nazwa_rasy}">Imie</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>

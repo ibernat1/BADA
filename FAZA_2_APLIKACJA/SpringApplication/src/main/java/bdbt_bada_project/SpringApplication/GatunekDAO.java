@@ -61,4 +61,6 @@ public class GatunekDAO {
         String sql = "DELETE FROM Gatunki WHERE nr_gatunku = ?";
         jdbcTemplate.update(sql,nr);
     }
+
+
 }

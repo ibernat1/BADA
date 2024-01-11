@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -25,6 +22,9 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/main_admin").setViewName("admin/main_admin");
         registry.addViewController("/main_user").setViewName("user/main_user");
         registry.addViewController("/zwierzeta").setViewName("zwierzeta");
+        registry.addViewController("/koty").setViewName("koty");
+        registry.addViewController("/psy").setViewName("psy");
+        registry.addViewController("/inne").setViewName("inne");
     }
 
 
@@ -76,12 +76,51 @@ public class AppController implements WebMvcConfigurer {
         model.addAttribute("list", listRasa);
         return "zwierzeta";
     }
+
+    @RequestMapping("/koty")
+    public String showKotyPage(Model model){
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+
+
+        model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
+        return "koty";
+    }
+
+    @RequestMapping("/psy")
+    public String showPsyPage(Model model){
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+
+
+        model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
+        return "psy";
+    }
+
+    @RequestMapping("/inne")
+    public String showInnePage(Model model){
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+
+
+        model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
+        return "inne";
+    }
     @RequestMapping("/dodajzwierze")
     public String showDodajZwierzeForm(Model model){
         Zwierze zwierze = new Zwierze();
-        model.addAttribute("zwierze",zwierze);
+        List<Gatunek> listaGatunkow = gatunekDao.list();
+        List<Rasa> listaRas = rasaDao.list();
+
+        model.addAttribute("zwierze", zwierze);
+        model.addAttribute("listaGatunkow", listaGatunkow);
+        model.addAttribute("listaRas", listaGatunkow);
         return "dodajzwierze_form";
     }
+
 
     @RequestMapping(value ="/zapisz", method = RequestMethod.POST)
     public String save(@ModelAttribute("zwierze") Zwierze zwierze){

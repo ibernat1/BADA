@@ -25,7 +25,7 @@ public class ZwierzetaDAO {
 
     /* Import java.util.List  (zawiera info z bazy danych) */
     public List<Zwierze> list(){
-        String sql = "SELECT * FROM ZWIERZĘTA";
+        String sql = "SELECT z.*, r.nazwa_rasy, g.nazwa_gatunku FROM ZWIERZĘTA z JOIN rasa r ON z.nr_rasy = r.nr_rasy JOIN gatunki g ON r.nazwa_gatunku = g.nr_gatunku";
         List<Zwierze> listZwierze = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Zwierze.class));
         return listZwierze;
     }

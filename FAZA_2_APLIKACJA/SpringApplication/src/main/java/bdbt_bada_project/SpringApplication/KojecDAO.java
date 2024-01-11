@@ -39,7 +39,7 @@ public class KojecDAO {
     public Kojec kojec(int nr) {
         Object [] args={nr};
         String sql= "SELECT * FROM Kojce WHERE nr_kojca= " + args[0];
-        Rasa kojec=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Kojec.class));
+        Kojec kojec=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Kojec.class));
         return kojec;
     }
     /* Update – aktualizacja danych */

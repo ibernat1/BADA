@@ -124,8 +124,9 @@
 		<artifactId>ojdbc11</artifactId>
 		<version>1.0</version>
 		<scope>system</scope>
-<!--		<systemPath>"C:\app\ojdbc11.jar"</systemPath>-->
-		<systemPath>D:\app\product\ojdbc11.jar</systemPath>
+<!--		<systemPath>D:\app\product\ojdbc11.jar</systemPath>-->
+
+		<systemPath>"C:\app\ojdbc11.jar"</systemPath>
 		<!--C:\app\ojdbc11.jar-->
 	</dependency>
 	<dependency>

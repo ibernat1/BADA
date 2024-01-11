@@ -40,7 +40,7 @@ public class ZwierzetaDAOTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date utilDate = dateFormat.parse("2023-10-04");
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        Zwierze zwierze = new Zwierze(10,"Benio", sqlDate, 'N', null, "2020", 1, null,1,2  );
+        Zwierze zwierze = new Zwierze(10,"Benio", sqlDate, 'N', null, "2020", 1, null,1,2,null,null  );
     }
     @Test
     void testGet(){

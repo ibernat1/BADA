@@ -16,6 +16,7 @@
         });
     </script>
 
+
     <style>
         body {
             background-color: #b7f7bf;
@@ -102,6 +103,17 @@
     <div class="form">
         <form action="#" th:action="@{/zapisz}" th:object="${zwierze}" method="post">
 
+            <label for="nazwa_gatunku">Gatunek</label>
+            <select id="nazwa_gatunku" th:field="*{nazwa_gatunku}">
+                <option th:each="gatunek : ${listaGatunkow}" th:value="${gatunek.nr_gatunku}" th:text="${gatunek.nazwa_gatunku}"></option>
+            </select>
+
+
+            <!-- <label for="nazwa_rasy">Rasa</label>
+            <select id="nazwa_rasy" th:field="*{nazwa_rasy}">
+            <option th:each="rasa : ${listaRas}" th:value="${rasa.nr_rasy}" th:text="${rasa.nazwa_rasy}"></option>
+            </select> -->
+
             <label for="imie">Imię</label>
             <input type="text" id="imie" th:field="*{imie}" placeholder="Imię...">
 
@@ -119,16 +131,10 @@
             <label for="rok_urodzenia">Rok urodzenia</label>
             <input type="text" id="rok_urodzenia" th:field="*{rok_urodzenia}" placeholder="Rok urodzenia...">
 
-            <label for="nr_schroniska">Numer schroniska</label>
-            <input type="text" id="nr_schroniska" th:field="*{nr_schroniska}" placeholder="Numer schroniska...">
-
-
 
             <label for="nr_kojca">Numer kojca</label>
             <input type="text" id="nr_kojca" th:field="*{nr_kojca}" placeholder="Numer kojca...">
 
-            <label for="nr_rasy">Numer rasy</label>
-            <input type="text" id="nr_rasy" th:field="*{nr_rasy}" placeholder="Numer rasy...">
 
             <div style="margin-top: 10px;">
                 <button type="submit" style="background-color: #025e0d; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;">

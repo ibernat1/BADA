@@ -13,6 +13,10 @@ public class Gatunek {
         this.nazwa_gatunku=nazwa_gatunku;
     }
 
+    public Gatunek(){
+
+    }
+
     public String getNazwa_gatunku() {
         return nazwa_gatunku;
     }

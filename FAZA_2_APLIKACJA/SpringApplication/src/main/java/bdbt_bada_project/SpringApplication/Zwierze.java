@@ -14,9 +14,13 @@ public class Zwierze {
     private Integer nr_adoptujacego;
     private Integer nr_kojca;
     private Integer nr_rasy;
+    private String nazwa_rasy;
+    private String nazwa_gatunku;
 
     public Zwierze() {
         this.data_adopcji=null;
+        this.nr_schroniska=1;
+        this.nr_rasy=3;
     }
 
     public Integer getNr_zwierzecia() {
@@ -103,7 +107,23 @@ public class Zwierze {
         this.nr_rasy = nr_rasy;
     }
 
-    public Zwierze(Integer nr_zwierzecia, String imie, Date data_przyjecia, char szczepienie_wscieklizna, Date data_adopcji, String rok_urodzenia, Integer nr_schroniska, Integer nr_adoptujacego, Integer nr_kojca, Integer nr_rasy){
+    public String getNazwa_rasy() {
+        return nazwa_rasy;
+    }
+
+    public void setNazwa_rasy(String nazwa_rasy) {
+        this.nazwa_rasy = nazwa_rasy;
+    }
+
+    public String getNazwa_gatunku() {
+        return nazwa_gatunku;
+    }
+
+    public void setNazwa_gatunku(String nazwa_gatunku) {
+        this.nazwa_gatunku = nazwa_gatunku;
+    }
+
+    public Zwierze(Integer nr_zwierzecia, String imie, Date data_przyjecia, char szczepienie_wscieklizna, Date data_adopcji, String rok_urodzenia, Integer nr_schroniska, Integer nr_adoptujacego, Integer nr_kojca, Integer nr_rasy, String nazwa_rasy, String nazwa_gatunku){
         super();
         this.nr_zwierzecia=nr_zwierzecia;
         this.imie=imie;
@@ -115,6 +135,8 @@ public class Zwierze {
         this.nr_adoptujacego=nr_adoptujacego;
         this.nr_kojca=nr_kojca;
         this.nr_rasy=nr_rasy;
+        this.nazwa_rasy=nazwa_rasy;
+        this.nazwa_gatunku=nazwa_gatunku;
     }
 
 

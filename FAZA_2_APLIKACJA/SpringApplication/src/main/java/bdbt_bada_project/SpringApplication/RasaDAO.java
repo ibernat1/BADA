@@ -32,6 +32,12 @@ public class RasaDAO {
         int nr_gatunku=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Rasa.class)).getNr_gatunku();
         return nr_gatunku;
     }
+
+    public List<Rasa> getRacesBySpecies(int nr_gatunku) {
+        String sql = "SELECT * FROM Rasa WHERE nr_gatunku = ?";
+        List<Rasa> listRasa = jdbcTemplate.query(sql, new Object[]{nr_gatunku}, BeanPropertyRowMapper.newInstance(Rasa.class));
+        return listRasa;
+    }
     public String getNazwaRasyWithNr(int nr){
         Object [] args={nr};
         String sql= "SELECT * FROM Rasa WHERE nr_rasy= " + args[0];
@@ -49,11 +55,11 @@ public class RasaDAO {
     }
     /* Read – odczytywanie danych z bazy */
     public Rasa get(int nr) {
-        Object [] args={nr};
-        String sql= "SELECT * FROM Rasa WHERE nr_rasy= " + args[0];
+        String sql= String.format("SELECT * FROM Rasa WHERE nr_rasy=%d", nr);
         Rasa rasa=jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Rasa.class));
         return rasa;
     }
+
     /* Update – aktualizacja danych */
     public void update(Rasa rasa) {
         String sql = "UPDATE Rasa SET nazwa_rasy=:nazwa_rasy, nr_gatunku=:nr_gatunku WHERE nr_rasy=:nr_rasy";

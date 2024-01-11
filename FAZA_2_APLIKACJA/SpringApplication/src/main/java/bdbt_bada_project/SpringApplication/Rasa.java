@@ -1,11 +1,11 @@
 package bdbt_bada_project.SpringApplication;
 
 public class Rasa {
-    private Integer nr_rasy;
+    private int nr_rasy;
     private String nazwa_rasy;
     private Integer nr_gatunku;
 
-    public Rasa(Integer nr_rasy, String nazwa_rasy, Integer nr_gatunku){
+    public Rasa(int nr_rasy, String nazwa_rasy, Integer nr_gatunku){
         super();
         this.nr_rasy=nr_rasy;
         this.nazwa_rasy=nazwa_rasy;
@@ -14,11 +14,11 @@ public class Rasa {
     public Rasa() {
     }
 
-    public Integer getNr_rasy() {
+    public int getNr_rasy() {
         return nr_rasy;
     }
 
-    public void setNr_rasy(Integer nr_rasy) {
+    public void setNr_rasy(int nr_rasy) {
         this.nr_rasy = nr_rasy;
     }
 
