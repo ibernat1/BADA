@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowe zwierze</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="icon" href="/static/assets/img/icon.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $(".datepicker").datepicker();
+        });
+    </script>
+
+
+    <style>
+        body {
+            background-color: #b7f7bf;
+        }
+
+
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div.form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Main</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container centered.container">
+    <div class="form">
+        <form action="#" th:action="@{/adoptuj_zwierze}" th:object="${zwierze}" method="post">
+
+            <label for="nazwa_gatunku">Gatunek</label>
+            <select id="nazwa_gatunku" th:field="*{nazwa_gatunku}">
+                <option th:each="gatunek : ${listaGatunkow}" th:value="${gatunek.nr_gatunku}" th:text="${gatunek.nazwa_gatunku}"></option>
+            </select>
+
+
+            <!-- <label for="nazwa_rasy">Rasa</label>
+            <select id="nazwa_rasy" th:field="*{nazwa_rasy}">
+            <option th:each="rasa : ${listaRas}" th:value="${rasa.nr_rasy}" th:text="${rasa.nazwa_rasy}"></option>
+            </select> -->
+
+            <label for="imie">Imię</label>
+            <input type="text" id="imie" th:field="*{imie}" placeholder="Imię...">
+
+            <label for="data_przyjecia">Data przyjęcia</label><br>
+            <input type="date" id="data_przyjecia" th:field="*{data_przyjecia}" placeholder="Data przyjęcia...">
+
+            <br>
+            <label for="szczepienie_wscieklizna">Czy szczepiony (T/N)</label>
+            <select id="szczepienie_wscieklizna"  th:field="*{szczepienie_wscieklizna}">
+                <option value="T">Tak</option>
+                <option value="N">Nie</option>
+            </select>
+
+
+            <label for="rok_urodzenia">Rok urodzenia</label>
+            <input type="text" id="rok_urodzenia" th:field="*{rok_urodzenia}" placeholder="Rok urodzenia...">
+
+
+            <label for="nr_kojca">Numer kojca</label>
+            <input type="text" id="nr_kojca" th:field="*{nr_kojca}" placeholder="Numer kojca...">
+
+
+            <div style="margin-top: 10px;">
+                <button type="submit" style="background-color: #025e0d; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Dodaj
+                </button>
+                <button type="button" onclick="window.location.href='/zwierzeta'" style="background-color: #C70039; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                    Anuluj
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -75,4 +75,12 @@ public class ZwierzetaDAO {
         return gatunek.getNazwaGatunkuWithNr(nr_gatunku);
     }
 
+    public void adoptujZwierze(Zwierze zwierze, int user_id){
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        zwierze.setData_adopcji(date);
+        zwierze.setNr_adoptujacego(user_id);
+        this.update(zwierze);
+    }
+
 }

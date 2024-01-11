@@ -1,5 +1,6 @@
 package bdbt_bada_project.SpringApplication;
-import jakarta.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -146,6 +147,14 @@ public class AppController implements WebMvcConfigurer {
     @RequestMapping("/usunzwierze/{nr_zwierzecia}")
     public String usunZwierze(@PathVariable(name = "nr_zwierzecia") Integer nr_zwierzecia){
         zwierzeDao.delete(nr_zwierzecia);
+        return "redirect:/zwierzeta";
+    }
+
+    @RequestMapping("/adoptuj_zwierze/{nr_zwierzecia}")
+    public String adoptujZwierze(@PathVariable(name="nr_zwierzecia") int nr){
+        Zwierze zwierze=zwierzeDao.get(nr);
+        int user_id=1; //na razie niech będzie na stałe, potem moze to jakoś przekminimy
+        zwierzeDao.adoptujZwierze(zwierze, user_id);
         return "redirect:/zwierzeta";
     }
 

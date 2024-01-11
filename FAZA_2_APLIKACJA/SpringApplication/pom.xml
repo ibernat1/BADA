@@ -126,7 +126,7 @@
 		<scope>system</scope>
 <!--		<systemPath>D:\app\product\ojdbc11.jar</systemPath>-->
 
-		<systemPath>"C:\app\ojdbc11.jar"</systemPath>
+		<systemPath>C:\app\ojdbc11.jar</systemPath>
 		<!--C:\app\ojdbc11.jar-->
 	</dependency>
 	<dependency>

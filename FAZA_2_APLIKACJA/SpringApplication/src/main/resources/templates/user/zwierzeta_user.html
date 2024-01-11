@@ -31,12 +31,12 @@
         #zwierzeta tr:hover {background-color: #a7ccac;}
 
         #zwierzeta th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #025e0d;
-    color: white;
-    }
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #025e0d;
+            color: white;
+        }
 
         .centered-container {
             display: flex;
@@ -123,19 +123,20 @@
         <thead>
         <tr> <!-- Table row -->
             <th>Imie</th>
+            <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
             <th>Szczepienie</th>
             <th>Szczepienie1</th>
             <th>Data adopcji</th>
             <th>Numer kojca</th>
-            <th>Edytuj</th>
-            <th>Usuń</th>
+            <th>Adoptuj</th>
         </tr>
         </thead>
         <!-- Table body -->
         <tbody>
-        <tr th:each="zwierze : ${listZwierze} " th:if="${zwierze.nazwa_gatunku == 'Kot'}">
+        <tr th:each="zwierze : ${listZwierze} ">
+            <td th:text="${zwierze.nazwa_gatunku}">Gatunek</td>
             <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
@@ -147,15 +148,11 @@
             <td th:text="${zwierze.data_adopcji}?: 'W schronisku'">Data adopcji</td>
             <td th:text="${zwierze.nr_kojca}">Numer kojca</td>
             <td>
-                <a th:href="@{'/edytujzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Edytuj</a>
-            </td>
-            <td>
-                <a th:href="@{'/usunzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Usuń</a>
+                <a th:href="@{'/adoptuj_zwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Adoptuj</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/dodajzwierze}" class="button no-underline">Dodaj</a>
 </div>
 
 </body>
