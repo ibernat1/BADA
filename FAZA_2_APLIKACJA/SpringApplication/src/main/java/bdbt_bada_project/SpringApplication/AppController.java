@@ -199,7 +199,7 @@ public class AppController implements WebMvcConfigurer {
 
         model.addAttribute("listZwierze", filteredZwierzeta);
 
-        return "adopcja";
+        return "user/adopcja";
     }
 
     @RequestMapping("/adoptujzwierze/{nr_zwierzecia}")

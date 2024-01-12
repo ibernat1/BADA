@@ -54,6 +54,14 @@
             background-color: #b7f7bf;
         }
 
+                .navbar-nav .nav-item .nav-link {
+    color: #b7f7bf; /* Kolor napisów "Zaloguj" i "Zwierzęta" */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #e6ffe8; /* Kolor napisów po najechaniu na nie */
+}
+
 
 
     </style>
@@ -74,16 +82,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Login</a>
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
         </div>

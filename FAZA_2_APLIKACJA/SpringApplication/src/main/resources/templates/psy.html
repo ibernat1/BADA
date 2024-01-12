@@ -78,6 +78,13 @@
         .no-underline {
             text-decoration: none !important;
         }
+                .navbar-nav .nav-item .nav-link {
+    color: #b7f7bf; /* Kolor napisów "Zaloguj" i "Zwierzęta" */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #e6ffe8; /* Kolor napisów po najechaniu na nie */
+}
 
     </style>
 
@@ -96,16 +103,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Login</a>
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
         </div>
@@ -113,7 +115,7 @@
 </nav>
 
 <div align="center">
-    <h1>Zwierzeta w schronisku</h1>
+    <h1>Nasze psy</h1>
 </div>
 
 <!-- Table -->
@@ -123,40 +125,34 @@
         <thead>
         <tr> <!-- Table row -->
             <th>Imie</th>
+            <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
+            <th>Rok urodzenia</th>
             <th>Szczepienie</th>
             <th>Szczepienie1</th>
-            <th>Data adopcji</th>
-            <th>Numer kojca</th>
-            <th>Edytuj</th>
-            <th>Usuń</th>
         </tr>
         </thead>
         <!-- Table body -->
         <tbody>
-        <tr th:each="zwierze : ${listZwierze} " th:if="${zwierze.nazwa_gatunku == 'Pies'}">
+        <tr th:each="zwierze : ${listZwierze}" th:unless="${zwierze.data_adopcji ne null}" th:if="${zwierze.nazwa_gatunku == 'Pies'}">
+            <td th:text="${zwierze.nazwa_gatunku}">Gatunek</td>
             <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
+            <td th:text="${zwierze.rok_urodzenia}">Rok urodzenia</td>
             <td>
-                <span th:if="${zwierze.szczepienie_wscieklizna == 'T'}">Tak</span>
-                <span th:unless="${zwierze.szczepienie_wscieklizna == 'T'}">Nie</span>
+                <span th:if="${zwierze.szczepienie_wscieklizna ne 'N'}">Tak</span>
+                <span th:unless="${zwierze.szczepienie_wscieklizna ne 'N'}">Nie</span>
             </td>
             <td th:text="${zwierze.szczepienie_wscieklizna}">Szczepienie1</td>
-            <td th:text="${zwierze.data_adopcji}?: 'W schronisku'">Data adopcji</td>
-            <td th:text="${zwierze.nr_kojca}">Numer kojca</td>
-            <td>
-                <a th:href="@{'/edytujzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Edytuj</a>
-            </td>
-            <td>
-                <a th:href="@{'/usunzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Usuń</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/dodajzwierze}" class="button no-underline">Dodaj</a>
 </div>
+
+
 
 </body>
 </html>
