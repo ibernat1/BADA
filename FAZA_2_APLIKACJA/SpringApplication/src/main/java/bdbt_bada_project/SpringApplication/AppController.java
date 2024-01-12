@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
+import java.util.Objects;
 
 
 @Configuration
@@ -76,13 +77,19 @@ public class AppController implements WebMvcConfigurer {
         model.addAttribute("listZwierze",listZwierze);
         model.addAttribute("list", listRasa);
 
-        if (gatunek != null && !gatunek.isEmpty()) {
-            // Filtrowanie po gatunku
-            filteredZwierzeta = zwierzeDao.findByGatunek(gatunek);
-        } else {
-            // Pobierz wszystkie zwierzęta
+
+        if("wszystkie".equals(gatunek) || gatunek == null){
             filteredZwierzeta = zwierzeDao.list();
         }
+        else {
+            if (gatunek != null && !gatunek.isEmpty()) {
+                filteredZwierzeta = zwierzeDao.findByGatunek(gatunek);
+            }
+            else{
+                filteredZwierzeta = zwierzeDao.list();
+            }
+        }
+
         model.addAttribute("listZwierze", filteredZwierzeta);
 
         return "zwierzeta";
