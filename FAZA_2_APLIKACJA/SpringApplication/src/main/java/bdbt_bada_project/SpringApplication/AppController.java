@@ -68,13 +68,23 @@ public class AppController implements WebMvcConfigurer {
     private GatunekDAO gatunekDao;
 
     @RequestMapping("/zwierzeta")
-    public String showZwierzetaPage(Model model){
+    public String showZwierzetaPage(@RequestParam(name = "gatunek", required = false) String gatunek, Model model){
         List<Zwierze> listZwierze = zwierzeDao.list();
         List<Rasa> listRasa = rasaDao.list();
-
+        List<Zwierze> filteredZwierzeta;
 
         model.addAttribute("listZwierze",listZwierze);
         model.addAttribute("list", listRasa);
+
+        if (gatunek != null && !gatunek.isEmpty()) {
+            // Filtrowanie po gatunku
+            filteredZwierzeta = zwierzeDao.findByGatunek(gatunek);
+        } else {
+            // Pobierz wszystkie zwierzęta
+            filteredZwierzeta = zwierzeDao.list();
+        }
+        model.addAttribute("listZwierze", filteredZwierzeta);
+
         return "zwierzeta";
     }
 
@@ -118,7 +128,7 @@ public class AppController implements WebMvcConfigurer {
 
         model.addAttribute("zwierze", zwierze);
         model.addAttribute("listaGatunkow", listaGatunkow);
-        model.addAttribute("listaRas", listaGatunkow);
+        model.addAttribute("listaRas", listaRas);
         return "dodajzwierze_form";
     }
 

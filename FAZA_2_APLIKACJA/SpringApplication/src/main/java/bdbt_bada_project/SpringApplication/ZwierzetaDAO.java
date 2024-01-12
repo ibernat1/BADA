@@ -64,6 +64,14 @@ public class ZwierzetaDAO {
         jdbcTemplate.update(sql,nr);
     }
 
+
+    public List<Zwierze> findByGatunek(String gatunek) {
+        Object [] args={gatunek};
+        String sql = "SELECT z.*, r.nazwa_rasy, g.nazwa_gatunku FROM ZWIERZĘTA z JOIN rasa r ON z.nr_rasy = r.nr_rasy JOIN gatunki g ON r.nazwa_gatunku = g.nr_gatunku WHERE g.nazwa_gatunku= '" + args[0] +"'";
+        List<Zwierze> listZwierze = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Zwierze.class));
+        return listZwierze;
+    }
+
     public String getNazwa_rasy(int nr_rasy){
         RasaDAO rasa = new RasaDAO(jdbcTemplate);
         return rasa.getNazwaRasyWithNr(nr_rasy);

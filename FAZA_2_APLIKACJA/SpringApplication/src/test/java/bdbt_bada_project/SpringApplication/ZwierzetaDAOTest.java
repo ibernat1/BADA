@@ -73,5 +73,12 @@ public class ZwierzetaDAOTest {
         dao.delete(id);
     }
 
+    @Test
+    void testfindByGatunek(){
+        List<Zwierze> listZwierze = dao.findByGatunek("Kot");
+
+        assertTrue(!listZwierze.isEmpty());
+    }
+
 }
 

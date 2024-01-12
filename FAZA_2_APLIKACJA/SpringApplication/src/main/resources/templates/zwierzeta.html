@@ -8,6 +8,13 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link rel="icon" href="/static/assets/img/icon.png" type="image/x-icon">
 
+    <script>
+        function filtrujPoGatunku() {
+            var selectedGatunek = document.getElementById("selectGatunek").value;
+            window.location.href = "/zwierzeta?gatunek=" + selectedGatunek;
+        }
+    </script>
+
     <style>
         body {
             background-color: #b7f7bf;
@@ -79,21 +86,67 @@
             text-decoration: none !important;
         }
 
+        .navbar {
+            background-color: #025e0d;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
     </style>
 
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="dropdown">
+        <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
+        <div class="dropdown-content">
+            <a target="_self" href="/psy">Psy</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
+            <img src="/static/assets/img/logo.jpg" alt="Logo">
         </a>
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -118,6 +171,17 @@
 
 <!-- Table -->
 <div class="container centered-container">
+
+    <form>
+        <label for="selectGatunek">Filtruj po gatunku:</label>
+        <select id="selectGatunek" onchange="filtrujPoGatunku()">
+            <option value="">Wszystkie</option>
+            <option value="Pies">Pies</option>
+            <option value="Kot">Kot</option>
+            <!-- Dodaj więcej opcji, jeśli masz inne gatunki -->
+        </select>
+    </form>
+
     <table id="zwierzeta">
         <!-- Table header -->
         <thead>
