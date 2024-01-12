@@ -27,6 +27,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/koty").setViewName("koty");
         registry.addViewController("/psy").setViewName("psy");
         registry.addViewController("/inne").setViewName("inne");
+        registry.addViewController("/adopcja").setViewName("adopcja");
     }
 
 
@@ -61,6 +62,13 @@ public class AppController implements WebMvcConfigurer {
         return "user/main_user";
     }
 
+
+    @RequestMapping("/zwierzeta")
+    public String showZwierzetaPage(Model model){
+
+        return "zwierzeta";
+    }
+
     @Autowired
     private ZwierzetaDAO zwierzeDao;
     @Autowired
@@ -68,8 +76,8 @@ public class AppController implements WebMvcConfigurer {
     @Autowired
     private GatunekDAO gatunekDao;
 
-    @RequestMapping("/zwierzeta")
-    public String showZwierzetaPage(@RequestParam(name = "gatunek", required = false) String gatunek, Model model){
+    @RequestMapping("/wszystkie")
+    public String showWszystkiePage(@RequestParam(name = "gatunek", required = false) String gatunek, Model model){
         List<Zwierze> listZwierze = zwierzeDao.list();
         List<Rasa> listRasa = rasaDao.list();
         List<Zwierze> filteredZwierzeta;
@@ -92,7 +100,7 @@ public class AppController implements WebMvcConfigurer {
 
         model.addAttribute("listZwierze", filteredZwierzeta);
 
-        return "zwierzeta";
+        return "wszystkie";
     }
 
     @RequestMapping("/koty")
@@ -167,8 +175,42 @@ public class AppController implements WebMvcConfigurer {
         return "redirect:/zwierzeta";
     }
 
+    @RequestMapping("/adopcja")
+    public String showAdopcjaPage(@RequestParam(name = "gatunek", required = false) String gatunek, Model model){
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+        List<Zwierze> filteredZwierzeta;
+
+        model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
+
+
+        if("wszystkie".equals(gatunek) || gatunek == null){
+            filteredZwierzeta = zwierzeDao.list();
+        }
+        else {
+            if (gatunek != null && !gatunek.isEmpty()) {
+                filteredZwierzeta = zwierzeDao.findByGatunek(gatunek);
+            }
+            else{
+                filteredZwierzeta = zwierzeDao.list();
+            }
+        }
+
+        model.addAttribute("listZwierze", filteredZwierzeta);
+
+        return "adopcja";
+    }
+
+    @RequestMapping("/adoptujzwierze/{nr_zwierzecia}")
+    public String adoptujZwierze(@PathVariable(name = "nr_zwierzecia") Integer nr){
+        Zwierze zwierze=zwierzeDao.get(nr);
+        zwierzeDao.adoptujZwierze(zwierze,1);
+        return "redirect:/zwierzeta";
+    }
+
     @RequestMapping("/adoptuj_zwierze/{nr_zwierzecia}")
-    public String adoptujZwierze(@PathVariable(name="nr_zwierzecia") int nr){
+    public String adoptuj_Zwierze(@PathVariable(name="nr_zwierzecia") int nr){
         Zwierze zwierze=zwierzeDao.get(nr);
         int user_id=1; //na razie niech będzie na stałe, potem moze to jakoś przekminimy
         zwierzeDao.adoptujZwierze(zwierze, user_id);

@@ -74,16 +74,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Login</a>
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
         </div>
@@ -94,41 +89,40 @@
 
 
 <!-- The rest of your content -->
+<br>
+<br>
 <div class="container centered-container">
     <div class="row">
-            <label style="font-size:30px">Witaj na stronie schroniska</label>
+            <label style="font-size:30px">Witamy w Schronisku "Ostoja Czworonoga"!</label>
         <br>
 
     </div>
 </div>
 <div class="container centered-container">
-    <div style="font-size:20px">Aby zobaczyć wszystkie zwierzęta kliknij  <a th:href="@{/zwierzeta}"><b>tutaj</b></a> lub wybierz gatunek, który cię interesuje
-
+    <div style="font-size:20px">
+        Cieszymy się, że znalazłeś(aś) drogę do naszej oazy dla zwierząt – miejsca, gdzie serce bije mocniej dla tych, którzy nie potrafią mówić. Nasze schronisko powstało z miłości do zwierząt i z pasji do pomagania potrzebującym czworonogom. Jesteśmy dedykowanym zespołem ludzi, który z ogromnym zaangażowaniem pracuje nad zapewnieniem bezpiecznego i kochającego domu każdemu zwierzakowi, który trafił do naszych drzwi.
+    </div>
+    <br>
+    <div style="font-size:17px">
+        Co nas wyróżnia?
+    </div>
+    <div style="font-size:17px">
+        <strong>Miłość i troska:</strong> Każdy nasz podopieczny jest traktowany z niezwykłą miłością i troską. Dla nas każdy futrzak to nie tylko zwierzę, ale prawdziwy przyjaciel.
+    </div>
+    <div style="font-size:17px">
+        <strong>Bezpieczeństwo:</strong> Zapewniamy odpowiednie warunki bytowe oraz opiekę weterynaryjną, aby nasi podopieczni czuli się bezpiecznie i komfortowo.
+    </div>
+    <div style="font-size:17px">
+        <strong>Adopcje z sercem:</strong> Jesteśmy przekonani, że każdy zwierzak zasługuje na własny, stały dom. Dlatego podejmujemy wszelkie starania, aby znaleźć najlepsze rodziny dla naszych podopiecznych.
+    </div>
+    <div style="font-size:17px">
+        <strong>Edukacja:</strong> Działamy nie tylko jako schronisko, ale także jako centrum edukacyjne, gdzie propagujemy odpowiedzialne posiadanie zwierząt oraz dbanie o ich dobrostan.
+    </div>
+    <div style="font-size:17px">
+        <strong>Wolontariat:</strong> Jeśli kochasz zwierzęta i chciałbyś(aś) pomóc, dołącz do naszego zespołu wolontariuszy. Każda pomoc jest cenna i przyczynia się do poprawy życia naszych podopiecznych.
     </div>
 </div>
 
-<div class="gallery-container">
-<div class="gallery">
-    <a target="_self" href="/psy">
-        <img src="/static/assets/img/dog.jpg" alt="Psy" width="600" height="600">
-    </a>
-    <div class="desc">Psy</div>
-</div>
-
-<div class="gallery">
-    <a target="_self" href="/koty">
-        <img src="../static/assets/img/cat.jpg" alt="Koty" width="800" height="800">
-    </a>
-    <div class="desc">Koty</div>
-</div>
-
-<div class="gallery">
-    <a target="_self" href="/inne">
-        <img src="/static/assets/img/other.jpg" alt="Inne" width="600" height="400">
-    </a>
-    <div class="desc">Pozostałe</div>
-</div>
-</div>
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

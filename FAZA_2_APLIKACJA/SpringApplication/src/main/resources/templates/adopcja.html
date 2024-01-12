@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zwierzeta w schronisku</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="icon" href="/static/assets/img/icon.png" type="image/x-icon">
+
+    <script>
+        function filtrujPoGatunku() {
+            var selectedGatunek = document.getElementById("selectGatunek").value;
+            window.location.href = "/adopcja?gatunek=" + selectedGatunek;
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #b7f7bf;
+        }
+
+
+        #zwierzeta {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        #zwierzeta td, #zwierzeta th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #zwierzeta tr:nth-child(even){background-color: #f2f2f2;}
+        #zwierzeta tr:nth-child(odd){background-color: white;}
+
+        #zwierzeta tr:hover {background-color: #a7ccac;}
+
+        #zwierzeta th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #025e0d;
+    color: white;
+    }
+
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #025e0d;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button:hover {
+            background-color: #02a816;
+            color: white;
+        }
+
+        .button1 {
+            background-color: #025e0d;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button1:hover {
+            background-color: #02a816;
+            color: white;
+        }
+
+        .no-underline {
+            text-decoration: none !important;
+        }
+
+        .navbar {
+            background-color: #025e0d;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="dropdown">
+        <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
+        <div class="dropdown-content">
+            <a target="_self" href="/psy">Psy</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/static/assets/img/logo.jpg" alt="Logo">
+        </a>
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Main</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div align="center">
+    <h1>Zwierzeta w schronisku</h1>
+</div>
+
+<!-- Table -->
+<div class="container centered-container">
+
+    <form>
+        <label for="selectGatunek">Filtruj po gatunku:</label>
+        <select id="selectGatunek" onchange="filtrujPoGatunku()">
+            <option value=""> </option>
+            <option value="wszystkie">Wszystkie</option>
+            <option value="Pies">Pies</option>
+            <option value="Kot">Kot</option>
+            <!-- Dodaj więcej opcji, jeśli masz inne gatunki -->
+        </select>
+    </form>
+
+    <table id="zwierzeta">
+        <!-- Table header -->
+        <thead>
+        <tr> <!-- Table row -->
+            <th>Imie</th>
+            <th>Gatunek</th>
+            <th>Rasa</th>
+            <th>Data przyjęcia</th>
+            <th>Rok urodzenia</th>
+            <th>Data adopcji</th>
+            <th>Adoptuj</th>
+        </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+        <tr th:each="zwierze : ${listZwierze}"  th:unless="${zwierze.data_adopcji ne null}">
+            <td th:text="${zwierze.nazwa_gatunku}">Gatunek</td>
+            <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
+            <td th:text="${zwierze.imie}">Imie</td>
+            <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
+            <td th:text="${zwierze.rok_urodzenia}">Rok urodzenia</td>
+            <td th:text="${zwierze.data_adopcji} ?: 'W schronisku'">Data adopcji</td>
+            <td>
+                <a th:href="@{'/adoptujzwierze/' + ${zwierze.nr_zwierzecia}}" class="button1 no-underline">Adoptuj</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

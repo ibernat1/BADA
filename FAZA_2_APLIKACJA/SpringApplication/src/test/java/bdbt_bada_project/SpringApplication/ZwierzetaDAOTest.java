@@ -80,5 +80,23 @@ public class ZwierzetaDAOTest {
         assertTrue(!listZwierze.isEmpty());
     }
 
+    @Test
+    void testAdopcja() throws ParseException{
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = dateFormat.parse("2023-10-04");
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        Zwierze zwierze = new Zwierze();
+        zwierze.setNr_zwierzecia(1);
+        zwierze.setData_przyjecia(sqlDate);
+        zwierze.setImie("Reksio");
+        zwierze.setSzczepienie_wscieklizna('T');
+        zwierze.setRok_urodzenia("2022");
+        zwierze.setNr_schroniska(1);
+        zwierze.setNr_kojca(1);
+        zwierze.setNr_rasy(3);
+        dao.adoptujZwierze(zwierze,2);
+    }
+
 }
 
