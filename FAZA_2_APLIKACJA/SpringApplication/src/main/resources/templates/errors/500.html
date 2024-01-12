@@ -17,19 +17,34 @@
         body {
             background-color: #b7f7bf;
         }
+        button.btn.btn-primary {
+            background-color: #025e0d;
+            border-color: #025e0d;
+        }
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
     <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
+        <a class="navbar-brand" href="/">
+            <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
