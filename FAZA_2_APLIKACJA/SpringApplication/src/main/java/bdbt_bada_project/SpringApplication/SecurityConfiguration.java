@@ -43,6 +43,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/main")
+                .successHandler((request, response, authentication) -> {
+                    // Log or print authentication details
+                    System.out.println("User authenticated: " + authentication.getName());
+                    // Redirect based on roles
+                    if (authentication.getName() == "admin") {
+                        response.sendRedirect("/main_admin");
+                    } else if (authentication.getName() == "user") {
+                        response.sendRedirect("/main_user");
+                    } else {
+                        response.sendRedirect("/index");
+                    }
+                })
                 .permitAll()
                 .and()
                 .logout()

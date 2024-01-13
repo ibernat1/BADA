@@ -106,7 +106,11 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
+                </li>
+
+                <li class="nav-item" th:unless="${#httpServletRequest.remoteUser != null}">
                     <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
@@ -125,7 +129,6 @@
         <thead>
         <tr> <!-- Table row -->
             <th>Imie</th>
-            <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
             <th>Rok urodzenia</th>
@@ -136,17 +139,15 @@
         <!-- Table body -->
         <tbody>
         <tr th:each="zwierze : ${listZwierze}" th:unless="${zwierze.data_adopcji ne null}" th:if="${zwierze.nazwa_gatunku == 'Pies'}">
-            <td th:text="${zwierze.nazwa_gatunku}">Gatunek</td>
             <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
             <td th:text="${zwierze.rok_urodzenia}">Rok urodzenia</td>
             <td>
-                <span th:if="${zwierze.szczepienie_wscieklizna ne 'N'}">Tak</span>
-                <span th:unless="${zwierze.szczepienie_wscieklizna ne 'N'}">Nie</span>
+                <span th:if="${zwierze.szczepienie_wscieklizna == 'T'}">Tak</span>
+                <span th:if="${zwierze.szczepienie_wscieklizna == 'N'}">Nie</span>
             </td>
             <td th:text="${zwierze.szczepienie_wscieklizna}">Szczepienie1</td>
-            </td>
         </tr>
         </tbody>
     </table>

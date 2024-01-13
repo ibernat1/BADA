@@ -154,11 +154,12 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Main</a>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/main}">Login</a>
+
+                <li class="nav-item" th:unless="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
         </div>

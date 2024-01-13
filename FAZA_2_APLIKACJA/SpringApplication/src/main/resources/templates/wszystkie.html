@@ -127,8 +127,6 @@
 .navbar-nav .nav-item .nav-link:hover {
     color: #e6ffe8; /* Kolor napisów po najechaniu na nie */
 }
-
-
     </style>
 
 </head>
@@ -149,7 +147,11 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
+                </li>
+
+                <li class="nav-item" th:unless="${#httpServletRequest.remoteUser != null}">
                     <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
             </ul>
@@ -184,6 +186,7 @@
             <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
+            <th>Rok urodzenia</th>
             <th>Szczepienie</th>
             <th>Szczepienie1</th>
         </tr>
@@ -195,12 +198,12 @@
             <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
+            <td th:text="${zwierze.rok_urodzenia}">Rok urodzenia</td>
             <td>
                 <span th:if="${zwierze.szczepienie_wscieklizna ne 'N'}">Tak</span>
                 <span th:unless="${zwierze.szczepienie_wscieklizna ne 'N'}">Nie</span>
             </td>
             <td th:text="${zwierze.szczepienie_wscieklizna}">Szczepienie1</td>
-            </td>
         </tr>
         </tbody>
     </table>

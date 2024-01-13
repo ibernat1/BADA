@@ -6,13 +6,110 @@
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 
+    <style>
+        body {
+            background-color: #b7f7bf;
+        }
+
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #025e0d;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button:hover {
+            background-color: #02a816;
+            color: white;
+        }
+
+        .button1 {
+            background-color: #025e0d;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button1:hover {
+            background-color: #02a816;
+            color: white;
+        }
+
+        .no-underline {
+            text-decoration: none !important;
+        }
+
+        .navbar {
+            background-color: #025e0d;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .navbar-nav .nav-item .nav-link {
+            color: #b7f7bf; /* Kolor napisów "Zaloguj" i "Zwierzęta" */
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #e6ffe8; /* Kolor napisów po najechaniu na nie */
+        }
+    </style>
+
 </head>
+
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
+    <div class="dropdown">
+        <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
+        <div class="dropdown-content">
+            <a target="_self" href="/adopcja">Adoptuj</a>
+        </div>
+    </div>
     <div class="container">
-        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>
+        <a class="navbar-brand" href="/">
+            <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -20,22 +117,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Home</a>
+                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Main
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item" th:unless="${#httpServletRequest.remoteUser != null}">
+                    <a class="nav-link" th:href="@{/main}">Zaloguj</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
-                            style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b></a>
-                </li>
-
             </ul>
         </div>
     </div>

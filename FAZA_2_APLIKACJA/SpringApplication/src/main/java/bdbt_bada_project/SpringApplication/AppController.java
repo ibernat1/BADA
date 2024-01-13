@@ -27,7 +27,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/koty").setViewName("koty");
         registry.addViewController("/psy").setViewName("psy");
         registry.addViewController("/inne").setViewName("inne");
-        registry.addViewController("/adopcja").setViewName("adopcja");
+        registry.addViewController("/adopcja").setViewName("user/adopcja");
     }
 
 
@@ -38,12 +38,12 @@ public class AppController implements WebMvcConfigurer {
                 (HttpServletRequest request) {
             if
             (request.isUserInRole
-                    ("ADMIN")) {
+                    ("ROLE_ADMIN")) {
                 return "redirect:/main_admin";
             }
             else if
             (request.isUserInRole
-                            ("USER")) {
+                            ("ROLE_USER")) {
                 return "redirect:/main_user";
             }
             else
@@ -60,6 +60,12 @@ public class AppController implements WebMvcConfigurer {
     @RequestMapping(value={"/main_user"})
     public String showUserPage(Model model) {
         return "user/main_user";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate(); // Wylogowanie poprzez zniszczenie sesji
+        return "redirect:/"; // Przekierowanie na stronę główną lub inną stronę po wylogowaniu
     }
 
 
