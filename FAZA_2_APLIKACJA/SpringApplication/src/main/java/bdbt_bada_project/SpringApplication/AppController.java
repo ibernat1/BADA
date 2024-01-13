@@ -28,6 +28,7 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/psy").setViewName("psy");
         registry.addViewController("/inne").setViewName("inne");
         registry.addViewController("/adopcja").setViewName("user/adopcja");
+        registry.addViewController("/zwierzeta_admin").setViewName("admin/zwierzeta_admin");
     }
 
 
@@ -109,6 +110,33 @@ public class AppController implements WebMvcConfigurer {
         return "wszystkie";
     }
 
+    @RequestMapping("/zwierzeta_admin")
+    public String showZwierzetaAdminPage(@RequestParam(name = "gatunek", required = false) String gatunek, Model model){
+        List<Zwierze> listZwierze = zwierzeDao.list();
+        List<Rasa> listRasa = rasaDao.list();
+        List<Zwierze> filteredZwierzeta;
+
+        model.addAttribute("listZwierze",listZwierze);
+        model.addAttribute("list", listRasa);
+
+
+        if("wszystkie".equals(gatunek) || gatunek == null){
+            filteredZwierzeta = zwierzeDao.list();
+        }
+        else {
+            if (gatunek != null && !gatunek.isEmpty()) {
+                filteredZwierzeta = zwierzeDao.findByGatunek(gatunek);
+            }
+            else{
+                filteredZwierzeta = zwierzeDao.list();
+            }
+        }
+
+        model.addAttribute("listZwierze", filteredZwierzeta);
+
+        return "admin/zwierzeta_admin";
+    }
+
     @RequestMapping("/koty")
     public String showKotyPage(Model model){
         List<Zwierze> listZwierze = zwierzeDao.list();
@@ -158,7 +186,7 @@ public class AppController implements WebMvcConfigurer {
     public String save(@ModelAttribute("zwierze") Zwierze zwierze){
         zwierzeDao.save(zwierze);
 
-        return "redirect:/zwierzeta";
+        return "redirect:/zwierzeta_admin";
     }
 
     @RequestMapping("/edytujzwierze/{nr_zwierzecia}")
@@ -172,13 +200,13 @@ public class AppController implements WebMvcConfigurer {
     @RequestMapping(value="/update", method=RequestMethod.POST)
     public String update(@ModelAttribute("zwierze") Zwierze zwierze){
         zwierzeDao.update(zwierze);
-        return "redirect:/";
+        return "redirect:/zwierzeta_admin";
     }
 
     @RequestMapping("/usunzwierze/{nr_zwierzecia}")
     public String usunZwierze(@PathVariable(name = "nr_zwierzecia") Integer nr_zwierzecia){
         zwierzeDao.delete(nr_zwierzecia);
-        return "redirect:/zwierzeta";
+        return "redirect:/zwierzeta_admin";
     }
 
     @RequestMapping("/adopcja")

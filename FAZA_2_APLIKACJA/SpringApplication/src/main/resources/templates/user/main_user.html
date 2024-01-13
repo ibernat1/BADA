@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Main User Page</title>
+    <title>Strona użytkownika</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 
@@ -103,6 +103,7 @@
     <div class="dropdown">
         <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
         <div class="dropdown-content">
+            <a target="_self" href="/zwierzeta">Przeglądaj</a>
             <a target="_self" href="/adopcja">Adoptuj</a>
         </div>
     </div>
@@ -117,9 +118,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/zwierzeta}">Zwierzęta</a>
-                </li>
                 <li class="nav-item" th:if="${#httpServletRequest.remoteUser != null}">
                     <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
                 </li>

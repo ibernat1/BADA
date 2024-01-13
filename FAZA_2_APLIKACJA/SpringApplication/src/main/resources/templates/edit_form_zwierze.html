@@ -99,7 +99,7 @@
 
 <div class="container centered.container">
     <div class="form">
-        <form action="#" th:action="@{/update}" th:object="${zwierze}" method="post">
+        <form action="/zwierzeta_admin" th:action="@{/update}" th:object="${zwierze}" method="post">
 
             <label for="imie">Imię</label>
             <input type="text" id="imie" th:field="*{imie}" placeholder="Imię...">
@@ -127,10 +127,10 @@
             <input type="text" id="nr_rasy" th:field="*{nr_rasy}" placeholder="Numer rasy...">
 
             <div style="margin-top: 10px;">
-                <button type="submit" style="background-color: #025e0d; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;">
-                    Dodaj
+                <button type="submit"  style="background-color: #025e0d; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Zapisz
                 </button>
-                <button type="button" onclick="window.location.href='/zwierzeta'" style="background-color: #C70039; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                <button type="button" onclick="window.location.href='/zwierzeta_admin'" style="background-color: #C70039; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
                     Anuluj
                 </button>
             </div>

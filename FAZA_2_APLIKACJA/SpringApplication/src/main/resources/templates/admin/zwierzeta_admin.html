@@ -11,7 +11,7 @@
     <script>
         function filtrujPoGatunku() {
             var selectedGatunek = document.getElementById("selectGatunek").value;
-            window.location.href = "/wszystkie?gatunek=" + selectedGatunek;
+            window.location.href = "/zwierzeta_admin?gatunek=" + selectedGatunek;
         }
     </script>
 
@@ -191,6 +191,7 @@
             <th>Gatunek</th>
             <th>Rasa</th>
             <th>Data przyjęcia</th>
+            <th>Rok urodzenia</th>
             <th>Szczepienie</th>
             <th>Szczepienie1</th>
             <th>Data adopcji</th>
@@ -206,6 +207,7 @@
             <td th:text="${zwierze.nazwa_rasy}">Rasa</td>
             <td th:text="${zwierze.imie}">Imie</td>
             <td th:text="${zwierze.data_przyjecia}">Data przyjęcia</td>
+            <td th:text="${zwierze.rok_urodzenia}">Rok urodzenia</td>
             <td>
                 <span th:if="${zwierze.szczepienie_wscieklizna == 'T'}">Tak</span>
                 <span th:unless="${zwierze.szczepienie_wscieklizna == 'T'}">Nie</span>
