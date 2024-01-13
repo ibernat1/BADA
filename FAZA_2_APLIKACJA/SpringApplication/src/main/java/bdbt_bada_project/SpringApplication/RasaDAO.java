@@ -20,6 +20,19 @@ public class RasaDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public int GetNrRasyFromNazwa (String nazwa){
+        int numer = 1;
+        String sql= "SELECT * FROM Rasa";
+        List<Rasa> listRasa=jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Rasa.class));
+        for (Rasa rasa : listRasa) {
+            if (rasa.getNazwa_rasy().equals(nazwa)) {
+                numer = rasa.getNr_rasy();
+                break; // Stop iterating once a match is found
+            }
+        }
+        return numer;
+    }
+
     /* Import java.util.List (zawiera info z bazy danych) */
     public List<Rasa> list(){
         String sql= "SELECT * FROM Rasa";

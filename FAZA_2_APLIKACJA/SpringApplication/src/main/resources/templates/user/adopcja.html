@@ -126,12 +126,12 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-
     <div class="dropdown">
         <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
         <div class="dropdown-content">
             <a target="_self" href="/zwierzeta">Przeglądaj</a>
-            <a target="_self" href="/adopcja">Adoptuj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('USER')}" target="_self" href="/adopcja">Adoptuj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('ADMIN')}" target="_self" href="/zwierzeta_admin">Zarządzaj</a>
         </div>
     </div>
     <div class="container">

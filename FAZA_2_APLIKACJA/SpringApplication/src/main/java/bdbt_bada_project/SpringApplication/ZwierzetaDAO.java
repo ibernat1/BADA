@@ -1,6 +1,7 @@
 package bdbt_bada_project.SpringApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.beans.BeanProperty;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -18,8 +20,20 @@ public class ZwierzetaDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    RasaDAO rasaDao;
+
+    public void commitTransaction() {
+        try {
+            jdbcTemplate.getDataSource().getConnection().commit();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Lub inna obsługa błędów, np. logger
+        }
+    }
+
     public ZwierzetaDAO(JdbcTemplate jdbcTemplate) {
         super();
+        this.rasaDao = rasaDao;
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -27,6 +41,9 @@ public class ZwierzetaDAO {
     public List<Zwierze> list(){
         String sql = "SELECT z.*, r.nazwa_rasy, g.nazwa_gatunku FROM ZWIERZĘTA z JOIN rasa r ON z.nr_rasy = r.nr_rasy JOIN gatunki g ON r.nazwa_gatunku = g.nr_gatunku";
         List<Zwierze> listZwierze = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Zwierze.class));
+        for (Zwierze zwierze : listZwierze) {
+            System.out.println(zwierze.getImie() + zwierze.getSzczepienie_wscieklizna());
+        }
         return listZwierze;
     }
 
@@ -35,7 +52,20 @@ public class ZwierzetaDAO {
         SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
         insertActor.withTableName("ZWIERZĘTA").usingColumns("imie", "data_przyjecia", "szczepienie_wscieklizna", "data_adopcji", "rok_urodzenia", "nr_schroniska", "nr_adoptujacego","nr_kojca","nr_rasy");
 
+        System.out.println(zwierze.getNazwa_rasy());
+        int numer =1;
 
+        if(zwierze.getNr_rasy() == null)
+        {
+            String nazwa = zwierze.getNazwa_rasy();
+
+            numer = rasaDao.GetNrRasyFromNazwa(nazwa);
+            zwierze.setNr_rasy(numer);
+        }
+        numer= Integer.parseInt(zwierze.getNazwa_rasy());
+
+        zwierze.setNr_rasy(numer);
+        System.out.println(zwierze.getNr_rasy());
 
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
         insertActor.execute(param);
@@ -52,10 +82,17 @@ public class ZwierzetaDAO {
     /* Update – aktualizacja danych */
     public void update(Zwierze zwierze) {
         String sql = "UPDATE Zwierzęta SET imie=:imie, data_przyjecia=:data_przyjecia, szczepienie_wscieklizna=:szczepienie_wscieklizna, data_adopcji=:data_adopcji, rok_urodzenia=:rok_urodzenia, nr_schroniska=:nr_schroniska, nr_adoptujacego=:nr_adoptujacego, nr_kojca=:nr_kojca, nr_rasy=:nr_rasy WHERE nr_zwierzecia=:nr_zwierzecia";
-        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
-        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+        try {
+            BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(zwierze);
+            NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
+            System.out.println(zwierze.getImie());
+            System.out.println(zwierze.getNr_zwierzecia());
+            template.update(sql, param);
+        } catch (DataAccessException e) {
+            // Log the exception or print the stack trace
+            e.printStackTrace();
+        }
 
-        template.update(sql, param);
     }
 
     /* Delete – wybrany rekord z danym id */

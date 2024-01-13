@@ -62,6 +62,28 @@
             align-items: center;
             text-align: center;
         }
+        .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
     </style>
 
@@ -69,6 +91,14 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
+    <div class="dropdown">
+        <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
+        <div class="dropdown-content">
+            <a target="_self" href="/zwierzeta">Przeglądaj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('USER')}" target="_self" href="/adopcja">Adoptuj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('ADMIN')}" target="_self" href="/zwierzeta_admin">Zarządzaj</a>
+        </div>
+    </div>
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">
@@ -101,6 +131,9 @@
     <div class="form">
         <form action="/zwierzeta_admin" th:action="@{/update}" th:object="${zwierze}" method="post">
 
+            <label for="id" style="display: none;">ID</label>
+            <input type="text" id="id" th:field="*{nr_zwierzecia}" placeholder="Imię..." style="display: none;">
+
             <label for="imie">Imię</label>
             <input type="text" id="imie" th:field="*{imie}" placeholder="Imię...">
 
@@ -116,9 +149,6 @@
 
             <label for="rok_urodzenia">Rok urodzenia</label>
             <input type="text" id="rok_urodzenia" th:field="*{rok_urodzenia}" placeholder="Rok urodzenia...">
-
-            <label for="nr_schroniska">Numer schroniska</label>
-            <input type="text" id="nr_schroniska" th:field="*{nr_schroniska}" placeholder="Numer schroniska...">
 
             <label for="nr_kojca">Numer kojca</label>
             <input type="text" id="nr_kojca" th:field="*{nr_kojca}" placeholder="Numer kojca...">

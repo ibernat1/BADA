@@ -21,7 +21,6 @@ public class Zwierze {
     public Zwierze() {
         this.data_adopcji=null;
         this.nr_schroniska=1;
-        this.nr_rasy=3;
     }
 
     public Integer getNr_zwierzecia() {

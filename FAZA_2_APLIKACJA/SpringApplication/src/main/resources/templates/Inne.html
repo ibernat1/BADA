@@ -86,6 +86,28 @@
 .navbar-nav .nav-item .nav-link:hover {
     color: #e6ffe8; /* Kolor napisów po najechaniu na nie */
 }
+        .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
     </style>
 
@@ -93,6 +115,14 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #025e0d;">
+    <div class="dropdown">
+        <span><img src="/static/assets/img/Menu.png" alt="Menu" style="height: 20px; width: auto;"></span>
+        <div class="dropdown-content">
+            <a target="_self" href="/zwierzeta">Przeglądaj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('USER')}" target="_self" href="/adopcja">Adoptuj</a>
+            <a th:if="${#httpServletRequest.isUserInRole('ADMIN')}" target="_self" href="/zwierzeta_admin">Zarządzaj</a>
+        </div>
+    </div>
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="/static/assets/img/logo.jpg" alt="Logo" style="height: 40px; width: auto;">

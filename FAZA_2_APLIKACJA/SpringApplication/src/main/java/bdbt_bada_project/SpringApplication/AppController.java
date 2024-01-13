@@ -199,6 +199,7 @@ public class AppController implements WebMvcConfigurer {
 
     @RequestMapping(value="/update", method=RequestMethod.POST)
     public String update(@ModelAttribute("zwierze") Zwierze zwierze){
+        System.out.println(zwierze.getNr_zwierzecia());
         zwierzeDao.update(zwierze);
         return "redirect:/zwierzeta_admin";
     }
